@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1602568319 source:c:\users\ferdous islam\desktop\algorithms\main\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+

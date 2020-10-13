@@ -4,6 +4,8 @@
     Time Complexity: O(maxElement)
     Works only on array of positive integers
 
+    (used mainly to apply radix sort)
+
 **/
 
 #include <iostream>
@@ -30,7 +32,7 @@ int getMax(vector<int> arr){
 // return maximum element of integer array
 
     int maxx=arr[0];
-    for(int i=1;i<arr.size();i++)
+    for(int i=0;i<arr.size();i++)
         if(maxx<arr[i]) maxx = arr[i];
 
     return maxx;
@@ -44,15 +46,16 @@ bool containsNegative(vector<int> arr){
     return false;
 }
 
-vector<int> countingSort(vector<int> arr){
+
+vector<int> countingSort(vector<int> arr)
+{
+// call this method from main code only
 // sort array of POSIITVE integer in O(maxElement)
 
     if(containsNegative(arr)){
         // stop function here
         cout<<"cannot sort array with negative integers!\n";
-        vector<int> wrongArray;
-        wrongArray.push_back(-1);
-        return wrongArray;
+        return arr;
     }
 
     int k = getMax(arr);

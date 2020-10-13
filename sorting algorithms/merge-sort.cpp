@@ -1,3 +1,10 @@
+/**
+
+    Merge sort
+    Time complexity: O(NlogN)
+
+**/
+
 #include <iostream>
 #include <bits/stdc++.h>
 
@@ -94,8 +101,8 @@ void mergeSort(int l, int r)
 ///------------------Merge Sort End------------------///
 
 
-int main()
-{
+void test(){
+
     for(int i=10;i>=1;i--)
         arr.push_back(st(i));
 
@@ -107,6 +114,13 @@ int main()
 
     cout<<"sorted array: ";
     printArr();
+
+}
+
+
+int main()
+{
+    test();
 
     return 0;
 }

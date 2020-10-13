@@ -1,3 +1,11 @@
+/**
+
+    Counting Sort
+    Time Complexity: O(maxElement)
+    Works only on array of positive integers
+
+**/
+
 #include <iostream>
 #include <bits/stdc++.h>
 #include <stdio.h>

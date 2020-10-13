@@ -15,9 +15,15 @@
 using namespace std;
 
 
+///------------------- algorithm function/s to be placed here start -------------------///
+
+
+
+///------------------- algorithm function/s to be placed end -------------------///
+
 void exec(){
 
-    cout<<"hello world";
+    cout<<"hello world!\n";
 
 }
 

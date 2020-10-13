@@ -14,16 +14,16 @@
 
 using namespace std;
 
+
 void exec(){
 
-    cout<<"hello world!";
+    cout<<"hello world";
 
 }
 
 
 int main()
 {
-
     exec();
 
     return 0;

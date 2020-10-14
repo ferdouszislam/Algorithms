@@ -21,9 +21,18 @@ using namespace std;
 
 ///------------------- algorithm function/s to be placed end -------------------///
 
-void exec(){
 
-    cout<<"hello world!\n";
+void simulate(){
+// simulate input to test the algorithm being implemented
+}
+
+
+void exec(){
+// execute the algorithm
+
+    simulate();
+
+    cout<<"hello world!";
 
 }
 

@@ -12,7 +12,7 @@
 using namespace std;
 
 
-///------------------- algorithm function/s to be placed here start -------------------///
+///------------------- floyd-warshall start -------------------///
 
 // number of nodes the algorithm will support
 const int MAX_NUMBER_OF_NODES = 1000;
@@ -91,7 +91,7 @@ string pathFromUtoV(int u, int v){
 
 }
 
-///------------------- algorithm function/s to be placed end -------------------///
+///------------------- floyd-warshall end -------------------///
 
 
 void simulate(){
@@ -169,20 +169,7 @@ void exec(){
 
 int main()
 {
-    //ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-
-    //freopen("input.txt", "r", stdin);
-    //freopen("output.txt", "w", stdout);
-
-    int t=1;
-
-    //cin>>t;
-
-    for(int T=1;T<=t;T++){
-
-        exec();
-
-    }
+    exec();
 
     return 0;
 }

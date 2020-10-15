@@ -1,48 +1,24 @@
 /**
 
-    Dijkstra's Algorithm to find shortest path from source to each node
-    Time complexity: O(VlogV + E) where, V = # of nodes, E = # of edges
+    BFS (0-1 BFS)
+    shortest path traversal 0 or, 1 weight graph
+    Time Complexity: O(V+E)
 
 **/
 
 #include <iostream>
 #include <bits/stdc++.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
 using namespace std;
 
 
-///------------------- dijstkra start -------------------///
+///------------------- BFS start -------------------///
 
-// number of nodes this supported by the implementation
-const int MAX_NUMBER_OF_NODES = 1000;
-
-
-// nodes in the graph o keep in the priority queue
-struct node{
-
-    int u; // node value
-    int cost; // cost to reach this node
-
-    node(){}
-
-    node(int _u, int _cost){
-        u = _u;
-        cost = _cost;
-    }
-
-    // operator overloading
-    // if this.cost > p.cost then 'this' node is smaller than p
-    // so 'this' should come later in priority_queue
-    operator < (const node& p) const { return cost > p.cost; }
-
-};
+// maximum number of nodes that is supported
+const int MAX_NUMBER_OF_NODES = 10000;
 
 
-
-// representation of the graph
+// variables used for graph representation
 // edgesOfEachNode[u][i] is the i-th edge of the node 'u'
 // distanceOfEachEdge[u][i] is the distance between node 'u' and it's i-th edge
 vector<int> edgesOfEachNode[MAX_NUMBER_OF_NODES];
@@ -60,36 +36,36 @@ void clearGraph(){
 }
 
 
-void dijstkra(int source, int numberOfNodes)
+void bfs(int source, int numberOfNodes)
 {
+// call this from the main code
+
     // initially nodes are unreachable(distance is infinity)
     for(int i=0;i<numberOfNodes;i++) dist[i] = INT_MAX;
 
-    // priority_queue based on each node's cost (heart of dijstkra)
-    priority_queue<node> q;
+    deque<int> q;
 
-    q.push(node(source, 0));
-    dist[source] = 0; // distance to reach source node=0
+    q.push_back(source);
+    dist[source] = 0;
 
     while(!q.empty()){
 
-        node curr = q.top();
-        q.pop();
-
-        int currNode = curr.u;
-        int distanceOfCurrNode = curr.cost;
+        int currNode = q.front();
+        q.pop_front();
 
         for(int i=0;i<edgesOfEachNode[currNode].size();i++){
 
-            int adjNode = edgesOfEachNode[currNode][i];
-            int distanceOfAdjNodeFromCurrNode = distanceOfEachEdge[currNode][i];
+            int adjNode, cost;
 
-            if( dist[currNode] + distanceOfAdjNodeFromCurrNode < dist[adjNode] ){
+            adjNode = edgesOfEachNode[currNode][i];
+            cost = distanceOfEachEdge[currNode][i];
 
-                dist[adjNode] = dist[currNode] + distanceOfAdjNodeFromCurrNode;
+            if( dist[adjNode] > dist[currNode] + cost ){
 
-                q.push( node(adjNode, dist[adjNode]) );
+                dist[adjNode] = dist[currNode] + cost;
 
+                // to enable 0-1 bfs
+                (cost == 0) ? q.push_front(adjNode) : q.push_back(adjNode);
             }
 
         }
@@ -99,73 +75,75 @@ void dijstkra(int source, int numberOfNodes)
 }
 
 
-///------------------- dijstkra end -------------------///
+
+///------------------- BFS end -------------------///
 
 
 void simulate(){
+// simulate input to test the algorithm being implemented
 
-    /** simulation graph:
+/** simulation graph:
 
-                  (10)    (1)
+                   (1)    (1)
                 0-------1-----2
-                |\(6)  /      |
-             (3)| \   /(2)    |(12)
+                |\(0)  /      |
+             (1)| \   /(0)    |(0)
                 |  \ /        |
                 5---3---------4
-                 (1)    (16)
+                 (1)    (0)
     */
 
     // 0 -> 1
     edgesOfEachNode[0].push_back(1);
-    distanceOfEachEdge[0].push_back(10);
+    distanceOfEachEdge[0].push_back(1);
     // 0 -> 3
     edgesOfEachNode[0].push_back(3);
-    distanceOfEachEdge[0].push_back(6);
+    distanceOfEachEdge[0].push_back(0);
     // 0 -> 5
     edgesOfEachNode[0].push_back(5);
-    distanceOfEachEdge[0].push_back(3);
+    distanceOfEachEdge[0].push_back(1);
 
     // 1 -> 0
     edgesOfEachNode[1].push_back(0);
-    distanceOfEachEdge[1].push_back(10);
+    distanceOfEachEdge[1].push_back(1);
     // 1 -> 2
     edgesOfEachNode[1].push_back(2);
     distanceOfEachEdge[1].push_back(1);
     // 1 -> 3
     edgesOfEachNode[1].push_back(3);
-    distanceOfEachEdge[1].push_back(2);
+    distanceOfEachEdge[1].push_back(0);
 
     // 2 -> 1
     edgesOfEachNode[2].push_back(1);
     distanceOfEachEdge[2].push_back(1);
     // 2 -> 4
     edgesOfEachNode[2].push_back(4);
-    distanceOfEachEdge[2].push_back(12);
+    distanceOfEachEdge[2].push_back(0);
 
 
     // 3 -> 0
     edgesOfEachNode[3].push_back(0);
-    distanceOfEachEdge[3].push_back(6);
+    distanceOfEachEdge[3].push_back(0);
     // 3 -> 1
     edgesOfEachNode[3].push_back(1);
-    distanceOfEachEdge[3].push_back(2);
+    distanceOfEachEdge[3].push_back(0);
     // 3 -> 4
     edgesOfEachNode[3].push_back(4);
-    distanceOfEachEdge[3].push_back(16);
+    distanceOfEachEdge[3].push_back(0);
     // 3 -> 5
     edgesOfEachNode[3].push_back(5);
     distanceOfEachEdge[3].push_back(1);
 
     // 4 -> 2
     edgesOfEachNode[4].push_back(2);
-    distanceOfEachEdge[4].push_back(12);
+    distanceOfEachEdge[4].push_back(0);
     // 4 -> 3
     edgesOfEachNode[4].push_back(3);
-    distanceOfEachEdge[4].push_back(16);
+    distanceOfEachEdge[4].push_back(0);
 
     // 5 -> 0
     edgesOfEachNode[5].push_back(0);
-    distanceOfEachEdge[5].push_back(3);
+    distanceOfEachEdge[5].push_back(1);
     // 5 -> 3
     edgesOfEachNode[5].push_back(3);
     distanceOfEachEdge[5].push_back(1);
@@ -181,14 +159,15 @@ int getRandomNumberInRange(int lower, int upper){
 
 
 void exec(){
+// execute the algorithm
 
     clearGraph();
 
-    int src=getRandomNumberInRange(0,5), n=6;
+    int src= getRandomNumberInRange(0,5), n=6;
 
     simulate();
 
-    dijstkra(src, n);
+    bfs(src, n);
 
     for(int i=0;i<n;i++){
         cout<<src<<" -> "<<i<<" shortest distance = "<<dist[i]<<"\n";

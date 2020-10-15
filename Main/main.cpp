@@ -16,7 +16,7 @@ using namespace std;
 
 
 
-///------------------- algorithm function/s to be placed end -------------------///
+///------------------- algorithm function/s to be placed here end -------------------///
 
 
 void simulate(){

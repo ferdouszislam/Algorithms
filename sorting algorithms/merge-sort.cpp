@@ -100,11 +100,14 @@ void mergeSort(int l, int r)
 
 ///------------------Merge Sort End------------------///
 
-
-void test(){
+void simulate(){
 
     for(int i=10;i>=1;i--)
         arr.push_back(st(i));
+
+}
+
+void exec(){
 
     cout<<"plain array: ";
     printArr();
@@ -120,7 +123,7 @@ void test(){
 
 int main()
 {
-    test();
+    exec();
 
     return 0;
 }

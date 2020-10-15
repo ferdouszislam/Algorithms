@@ -16,6 +16,9 @@ using namespace std;
 
 ///------------------- dijstkra start -------------------///
 
+// number of nodes this supported by the implementation
+const int MAX_NUMBER_OF_NODES = 1000;
+
 
 // nodes in the graph o keep in the priority queue
 struct node{
@@ -42,10 +45,19 @@ struct node{
 // representation of the graph
 // edgesOfEachNode[u][i] is the i-th edge of the node 'u'
 // distanceOfEachEdge[u][i] is the distance between node 'u' and it's i-th edge
-vector<int> edgesOfEachNode[10000];
-vector<int> distanceOfEachEdge[10000];
+vector<int> edgesOfEachNode[MAX_NUMBER_OF_NODES];
+vector<int> distanceOfEachEdge[MAX_NUMBER_OF_NODES];
 // distance of each node in the graph while traversing from 'source'
-int dist[10000];
+int dist[MAX_NUMBER_OF_NODES];
+
+void clearGraph(){
+
+    for(int i=0;i<MAX_NUMBER_OF_NODES;i++){
+        edgesOfEachNode.clear();
+        distanceOfEachEdge.clear();
+    }
+
+}
 
 
 void dijstkra(int source, int numberOfNodes)

@@ -108,7 +108,7 @@ vector<int> getNRandomNumbersInRange(int lower, int upper, int n){
     return randomNumbers;
 }
 
-void test(){
+void exec(){
 
     arr = getNRandomNumbersInRange(0,100,10);
 
@@ -126,7 +126,7 @@ void test(){
 
 int main()
 {
-    test();
+    exec();
 
     return 0;
 }

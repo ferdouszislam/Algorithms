@@ -8,9 +8,6 @@
 
 #include <iostream>
 #include <bits/stdc++.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
 using namespace std;
 
@@ -33,13 +30,25 @@ void exec(){
     simulate();
 
     cout<<"hello world!";
-
 }
 
 
 int main()
 {
-    exec();
+    //ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+
+    //freopen("input.txt", "r", stdin);
+    //freopen("output.txt", "w", stdout);
+
+    int t=1;
+
+    //cin>>t;
+
+    for(int T=1;T<=t;T++){
+
+        exec();
+
+    }
 
     return 0;
 }

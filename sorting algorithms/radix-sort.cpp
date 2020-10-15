@@ -75,10 +75,10 @@ vector<int> countingSortBasedOnDigitPosition(vector<int> arr, int digitPosition)
 
     int k = getMax(digitArr);
 
-    // prefix sum array of the counts of each digit in 'arr'
+    // prefix sum array of the counts of each digit in 'digitArr'
     int d[k+1] = {0};
 
-    // get counts of each integer in 'arr'
+    // get counts of each integer in 'digitArr'
     for(int i=0;i<digitArr.size();i++) d[digitArr[i]]++;
 
     // do prefix array sum
@@ -91,8 +91,8 @@ vector<int> countingSortBasedOnDigitPosition(vector<int> arr, int digitPosition)
     // initialize the sorted array
     vector<int> sortedArr(arr.size());
 
-    // loop starts from last position of 'arr' to maintain stable sort
-    for(int i=arr.size()-1; i>=0; i--){
+    // loop starts from last position of 'digitArr' to maintain stable sort
+    for(int i=digitArr.size()-1; i>=0; i--){
 
         // sorted position is calculated based on 'digitArr'
         int sortedPositionOfArrI = d[digitArr[i]]-1; // -1 for 0-based indexing
@@ -147,7 +147,7 @@ vector<int> getNRandomNumbersInRange(int lower, int upper, int n){
     return randomNumbers;
 }
 
-void test(){
+void exec(){
 
     arr = getNRandomNumbersInRange(1,100000,10);
 
@@ -165,6 +165,7 @@ void test(){
 
 int main()
 {
-    test();
+    exec();
+
     return 0;
 }

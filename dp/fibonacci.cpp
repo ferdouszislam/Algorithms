@@ -51,7 +51,7 @@ int fibo(int n){
 
 ///------------------------ fibonacci using DP end ------------------------///
 
-int getRandomNumbersInRange(int lower, int upper){
+int getRandomNumberInRange(int lower, int upper){
 // generate a random number in the range- ['lower', 'upper']
 
     srand(time(0));
@@ -60,7 +60,7 @@ int getRandomNumbersInRange(int lower, int upper){
 
 void exec(){
 
-    int n = getRandomNumbersInRange(1, 39);
+    int n = getRandomNumberInRange(1, 39);
 
     cout<<"fibonacci("<<n<<") = "<<fibo(n)<<"\n";
 

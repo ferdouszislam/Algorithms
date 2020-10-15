@@ -24,12 +24,18 @@ void simulate(){
 }
 
 
+int getRandomNumberInRange(int lower, int upper){
+// generate a random number in the range- ['lower', 'upper']
+    srand(time(0));
+    return rand()%(upper-lower+1)+lower;
+}
+
+
 void exec(){
 // execute the algorithm
 
-    simulate();
-
     cout<<"hello world!";
+
 }
 
 

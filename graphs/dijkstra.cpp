@@ -14,10 +14,11 @@
 using namespace std;
 
 
-///------------------- dijstkra start -------------------///
+///------------------- Dijkstra start -------------------///
+
 
 // number of nodes this supported by the implementation
-const int MAX_NUMBER_OF_NODES = 1000;
+const int MAX_NUMBER_OF_NODES = 10000;
 
 
 // nodes in the graph o keep in the priority queue
@@ -36,7 +37,7 @@ struct node{
     // operator overloading
     // if this.cost > p.cost then 'this' node is smaller than p
     // so 'this' should come later in priority_queue
-    operator < (const node& p) const { return cost > p.cost; }
+    bool operator < (const node& p) const { return cost > p.cost; }
 
 };
 
@@ -49,6 +50,19 @@ vector<int> edgesOfEachNode[MAX_NUMBER_OF_NODES];
 vector<int> distanceOfEachEdge[MAX_NUMBER_OF_NODES];
 // distance of each node in the graph while traversing from 'source'
 int dist[MAX_NUMBER_OF_NODES];
+// parents of each node for shortest path from 'source'
+vector<int> parent[MAX_NUMBER_OF_NODES];
+
+void showParents(int n){
+// print parents stored as adjacency list
+// must be called in the main code AFTER dijkstra() is called
+    for(int i=0;i<n;i++){
+        cout<<i<<" -> ";
+        for(int j=0;j<parent[i].size();j++) cout<<parent[i][j]<<" ";
+        cout<<endl;
+    }
+    cout<<endl;
+}
 
 void clearGraph(){
 // clears/resets graph representation variables
@@ -56,12 +70,16 @@ void clearGraph(){
     for(int i=0;i<MAX_NUMBER_OF_NODES;i++){
         edgesOfEachNode[i].clear();
         distanceOfEachEdge[i].clear();
+        parent[i].clear();
     }
 }
 
 
 void dijstkra(int source, int numberOfNodes)
 {
+
+    //cout<<endl;
+
     // initially nodes are unreachable(distance is infinity)
     for(int i=0;i<numberOfNodes;i++) dist[i] = INT_MAX;
 
@@ -84,12 +102,19 @@ void dijstkra(int source, int numberOfNodes)
             int adjNode = edgesOfEachNode[currNode][i];
             int distanceOfAdjNodeFromCurrNode = distanceOfEachEdge[currNode][i];
 
-            if( dist[currNode] + distanceOfAdjNodeFromCurrNode < dist[adjNode] ){
+            if( distanceOfCurrNode + distanceOfAdjNodeFromCurrNode < dist[adjNode] ){
 
-                dist[adjNode] = dist[currNode] + distanceOfAdjNodeFromCurrNode;
+                dist[adjNode] = distanceOfCurrNode + distanceOfAdjNodeFromCurrNode;
 
                 q.push( node(adjNode, dist[adjNode]) );
 
+                parent[adjNode].clear();
+                parent[adjNode].push_back(currNode);
+
+            }
+
+            else if(distanceOfCurrNode + distanceOfAdjNodeFromCurrNode == dist[adjNode]){
+                parent[adjNode].push_back(currNode);
             }
 
         }
@@ -99,7 +124,7 @@ void dijstkra(int source, int numberOfNodes)
 }
 
 
-///------------------- dijstkra end -------------------///
+///------------------- Dijkstra end -------------------///
 
 
 void simulate(){
@@ -188,11 +213,14 @@ void exec(){
 
     simulate();
 
-    dijstkra(src, n);
+    dijkstra(src, n);
 
     for(int i=0;i<n;i++){
         cout<<src<<" -> "<<i<<" shortest distance = "<<dist[i]<<"\n";
     }
+
+    cout<<"parents = \n";
+    showParents();
 
 }
 

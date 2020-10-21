@@ -18,7 +18,6 @@ using namespace std;
 
 ///------------------- algorithm function/s to be placed here end -------------------///
 
-
 void simulate(){
 // simulate input to test the algorithm being implemented
 }
@@ -30,11 +29,10 @@ int getRandomNumberInRange(int lower, int upper){
     return rand()%(upper-lower+1)+lower;
 }
 
-
 void exec(){
 // execute the algorithm
 
-    cout<<"hello world!";
+    cout<<"hello world!\n";
 
 }
 

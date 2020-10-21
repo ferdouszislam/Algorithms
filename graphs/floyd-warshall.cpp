@@ -2,7 +2,7 @@
 
     Floyd-Warshall Algorithm
     shortest path traversal using adjacency matrix
-    Time Complexity: O(n^3) when to use it?
+    Time Complexity: O(n^3), works with negative edges too!
 
 **/
 
@@ -50,11 +50,15 @@ void floydWarshall(int numberOfNodes)
         for(int i=0;i<numberOfNodes;i++)
             for(int j=0;j<numberOfNodes;j++){
 
-                unsigned long long distanceFromItoJ, distanceFromItoK, distanceFromKtoJ;
+                int distanceFromItoJ, distanceFromItoK, distanceFromKtoJ;
 
-                distanceFromItoJ = (unsigned long long)targetMatrix[i][j];
-                distanceFromItoK = (unsigned long long)targetMatrix[i][k];
-                distanceFromKtoJ = (unsigned long long)targetMatrix[k][j];
+                distanceFromItoJ = targetMatrix[i][j];
+                distanceFromItoK = targetMatrix[i][k];
+                distanceFromKtoJ = targetMatrix[k][j];
+
+                   // no edge between i,k       // no edge between k,j
+                if(distanceFromItoK==INT_MAX || distanceFromKtoJ==INT_MAX)
+                    continue;
 
                 if( distanceFromItoJ > distanceFromItoK + distanceFromKtoJ ){
                     targetMatrix[i][j] = targetMatrix[i][k] + targetMatrix[k][j];

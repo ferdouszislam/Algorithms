@@ -77,8 +77,7 @@ void clearGraph(){
 
 void dijstkra(int source, int numberOfNodes)
 {
-
-    //cout<<endl;
+// call this function from the main code
 
     // initially nodes are unreachable(distance is infinity)
     for(int i=0;i<numberOfNodes;i++) dist[i] = INT_MAX;

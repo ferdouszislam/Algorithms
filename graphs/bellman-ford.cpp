@@ -26,10 +26,11 @@ vector<int> distanceOfEachEdge[MAX_NUMBER_OF_NODES];
 // distance of each node in the graph while traversing from 'source'
 int dist[MAX_NUMBER_OF_NODES];
 
-
-// flag for existence of negative cycle
-bool negativeCycleExists;
-
+void insertToGraph(int u, int v, int c){
+// insert new edge u->v at cost c to graph
+    edgesOfEachNode[u].push_back(v);
+    distanceOfEachEdge[u].push_back(c);
+}
 
 void clearGraph(){
 // clears/resets graph representation variables
@@ -39,6 +40,10 @@ void clearGraph(){
         distanceOfEachEdge[i].clear();
     }
 }
+
+
+// flag for existence of negative cycle
+bool negativeCycleExists;
 
 
 void bellmanFord(int source, int numberOfNodes)
@@ -124,37 +129,29 @@ void simulate(){
     */
 
     // 0 -> 1
-    edgesOfEachNode[0].push_back(1);
-    distanceOfEachEdge[0].push_back(10);
+    insertToGraph(0, 1, 10);
     // 0 -> 3
-    edgesOfEachNode[0].push_back(3);
-    distanceOfEachEdge[0].push_back(-6);
+    insertToGraph(0, 3, -6);
 
 
     // 1 -> 2
-    edgesOfEachNode[1].push_back(2);
-    distanceOfEachEdge[1].push_back(1);
+    insertToGraph(1, 2, 1);
 
 
     // 2 -> 4
-    edgesOfEachNode[2].push_back(4);
-    distanceOfEachEdge[2].push_back(12);
+    insertToGraph(2, 4, 12);
 
 
     // 3 -> 1
-    edgesOfEachNode[3].push_back(1);
-    distanceOfEachEdge[3].push_back(2);
+    insertToGraph(3, 1, 2);
     // 3 -> 4
-    edgesOfEachNode[3].push_back(4);
-    distanceOfEachEdge[3].push_back(16);
+    insertToGraph(3, 4, 16)
     // 3 -> 5
-    edgesOfEachNode[3].push_back(5);
-    distanceOfEachEdge[3].push_back(1);
+    insertToGraph(3, 5, 1);
 
 
     // 5 -> 0
-    edgesOfEachNode[5].push_back(0);
-    distanceOfEachEdge[5].push_back(5);
+    insertToGraph(5, 0, 5);
 
 
 }

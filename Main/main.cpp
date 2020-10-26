@@ -33,9 +33,6 @@ int getRandomNumberInRange(int lower, int upper){
 
 void exec(int T){
 // execute the algorithm
-
-
-
 }
 
 

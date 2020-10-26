@@ -53,6 +53,12 @@ int dist[MAX_NUMBER_OF_NODES];
 // parents of each node for shortest path from 'source'
 vector<int> parent[MAX_NUMBER_OF_NODES];
 
+void insertToGraph(int u, int v, int c){
+// insert new edge u->v at cost c to graph
+    edgesOfEachNode[u].push_back(v);
+    distanceOfEachEdge[u].push_back(c);
+}
+
 void showParents(int n){
 // print parents stored as adjacency list
 // must be called in the main code AFTER dijkstra() is called
@@ -140,59 +146,43 @@ void simulate(){
     */
 
     // 0 -> 1
-    edgesOfEachNode[0].push_back(1);
-    distanceOfEachEdge[0].push_back(10);
+    insertToGraph(0, 1, 10);
     // 0 -> 3
-    edgesOfEachNode[0].push_back(3);
-    distanceOfEachEdge[0].push_back(6);
+    insertToGraph(0, 3, 6);
     // 0 -> 5
-    edgesOfEachNode[0].push_back(5);
-    distanceOfEachEdge[0].push_back(3);
+    insertToGraph(0, 5, 3);
 
     // 1 -> 0
-    edgesOfEachNode[1].push_back(0);
-    distanceOfEachEdge[1].push_back(10);
+    insertToGraph(1, 0, 10);
     // 1 -> 2
-    edgesOfEachNode[1].push_back(2);
-    distanceOfEachEdge[1].push_back(1);
+    insertToGraph(1, 2, 1);
     // 1 -> 3
-    edgesOfEachNode[1].push_back(3);
-    distanceOfEachEdge[1].push_back(2);
+    insertToGraph(1, 3, 2);
 
     // 2 -> 1
-    edgesOfEachNode[2].push_back(1);
-    distanceOfEachEdge[2].push_back(1);
+    insertToGraph(2, 1, 1);
     // 2 -> 4
-    edgesOfEachNode[2].push_back(4);
-    distanceOfEachEdge[2].push_back(12);
+    insertToGraph(2, 4, 12);
 
 
     // 3 -> 0
-    edgesOfEachNode[3].push_back(0);
-    distanceOfEachEdge[3].push_back(6);
+    insertToGraph(3, 0, 6);
     // 3 -> 1
-    edgesOfEachNode[3].push_back(1);
-    distanceOfEachEdge[3].push_back(2);
+    insertToGraph(3, 1, 2);
     // 3 -> 4
-    edgesOfEachNode[3].push_back(4);
-    distanceOfEachEdge[3].push_back(16);
+    insertToGraph(3, 4, 16);
     // 3 -> 5
-    edgesOfEachNode[3].push_back(5);
-    distanceOfEachEdge[3].push_back(1);
+    insertToGraph(3, 5, 1);
 
     // 4 -> 2
-    edgesOfEachNode[4].push_back(2);
-    distanceOfEachEdge[4].push_back(12);
+    insertToGraph(4, 2, 12);
     // 4 -> 3
-    edgesOfEachNode[4].push_back(3);
-    distanceOfEachEdge[4].push_back(16);
+    insertToGraph(4, 3, 16);
 
     // 5 -> 0
-    edgesOfEachNode[5].push_back(0);
-    distanceOfEachEdge[5].push_back(3);
+    insertToGraph(5, 0, 3);
     // 5 -> 3
-    edgesOfEachNode[5].push_back(3);
-    distanceOfEachEdge[5].push_back(1);
+    insertToGraph(5, 3, 1);
 
 }
 

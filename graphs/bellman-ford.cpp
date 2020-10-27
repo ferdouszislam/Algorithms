@@ -63,12 +63,18 @@ void bellmanFord(int source, int numberOfNodes)
     // do edge relaxation n-1 times to get all the shortest distances (even the ones that are reachable through n-1 edges)
     for(int step=1;step<=numberOfNodes-1;step++){
 
+        // array to contain shortest distance of nodes reachable with 'step' number of edges
+        int tmpDist[numberOfNodes];
+
+        for(int i=0;i<numberOfNodes;i++) tmpDist[i] = dist[i];
+
         // relax all edges
         for(int i=0;i<MAX_NUMBER_OF_NODES;i++){
             for(int j=0;j<edgesOfEachNode[i].size();j++){
 
                 int u = i, v = edgesOfEachNode[i][j], costFromUtoV = distanceOfEachEdge[i][j];
-                int currCostOfU = dist[u], currCostOfV = dist[v];
+                                            // **
+                int currCostOfU = dist[u], currCostOfV = tmpDist[v];
 
 
                 // 'u' is currently unreachable
@@ -77,12 +83,16 @@ void bellmanFord(int source, int numberOfNodes)
 
                 if(currCostOfV > currCostOfU+costFromUtoV){
 
-                    dist[v] = currCostOfU+costFromUtoV;
+                    tmpDist[v] = currCostOfU + costFromUtoV;
+                    //dist[v] = currCostOfU+costFromUtoV;
 
                 }
 
             }
         }
+
+        // now 'dist' contains shortest distance of nodes passing 'step' number of edges
+        for(int i=0;i<numberOfNodes;i++) dist[i] = tmpDist[i];
 
     }
 

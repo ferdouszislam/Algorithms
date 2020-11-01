@@ -19,7 +19,7 @@ using namespace std;
 ///--------------------------------------------- Disjoint-Set-Union start ---------------------------------------------///
 
 // maximum number of elements/nodes
-const int MAX_NUMBER_OF_ELEMENTS = 1000000;
+const int MAX_NUMBER_OF_ELEMENTS = 100000+5;
 
 // parent[v] = direct parent of the element 'v'
 int parent[MAX_NUMBER_OF_ELEMENTS];
@@ -29,6 +29,9 @@ int counter[MAX_NUMBER_OF_ELEMENTS];
 // true if graph contains cycles
 bool cycleExists;
 
+// number of sub-sets/trees in dsu
+int numberOfSubSets;
+
 void reset(){
 // reset the DSU
     for(int i=0;i<MAX_NUMBER_OF_ELEMENTS;i++){
@@ -36,7 +39,9 @@ void reset(){
         counter[i] = 0;
     }
     cycleExists = false;
+    numberOfSubSets = 0;
 }
+
 
 void make_set(int v){
 // create new set with only element 'v'
@@ -45,6 +50,7 @@ void make_set(int v){
     if(parent[v]==-1){ // if parent[v]!=-1 then the element already exists in the DSU
         parent[v] = v;
         counter[v] = 1;
+        numberOfSubSets++;
     }
 
 }
@@ -91,6 +97,9 @@ void union_sets(int a, int b){
         // there is no set/tree rooted at a's root now
         counter[rootOfSetBBelongTo] = 0;
 
+        // two subsets merged to create one so decrement by 1
+        numberOfSubSets--;
+
     }
 
     else{
@@ -100,6 +109,7 @@ void union_sets(int a, int b){
         cycleExists = true;
     }
 }
+
 
 bool belongsToSameSet(int a, int b){
 // returns true if 'a' and 'b' belong to the same tree

@@ -1,9 +1,6 @@
 /**
-
     template for testing/using the algorithms
-
     import(copy-paste the methods ;v) algorithm/s and use here
-
 **/
 
 #include <iostream>
@@ -24,10 +21,11 @@ void simulate(){
 }
 
 
+/// courtesy: https://codeforces.com/blog/entry/61587
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 int getRandomNumberInRange(int lower, int upper){
 // generate a random number in the range- ['lower', 'upper']
-    srand(time(0));
-    return rand()%(upper-lower+1)+lower;
+    return uniform_int_distribution<int>(lower, upper)(rng);
 }
 
 

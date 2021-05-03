@@ -30,7 +30,7 @@ int bin_search(int x) {
 
     sort(a, a+n);
 
-    int left = 0, right = n, mid, resultPos = -1;
+    int left = 0, right = n-1, mid, resultPos = -1;
 
     while(left<=right) {
 
